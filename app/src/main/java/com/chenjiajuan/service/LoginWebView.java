@@ -87,12 +87,9 @@ public class LoginWebView extends LinearLayout {
              return super.shouldInterceptRequest(view, request);
          }
 
-         //https://qrlogin.taobao.com/qrcodelogin/generateNoLoginQRCode.do?lt=m&callback=jsonp1
          @Override
          public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
              Log.e(TAG,"api 14 shouldInterceptRequest.....");
-             Log.e(TAG,"api 14 url : "+url);
-             Log.e(TAG,"api 14 url : "+url);
              if (url.contains("qrcodelogin/generateNoLoginQRCode.do")){
                  try {
                      URL url1=new URL(url);
@@ -112,6 +109,7 @@ public class LoginWebView extends LinearLayout {
                          if (matcher.find(1)){
                              String json=matcher.group(1);
                              Log.e(TAG,"json : "+json);
+                             qrCodeListener.fetchLoginUrl(json);
                          }
                          ByteArrayInputStream inputStream=new ByteArrayInputStream(result.getBytes());
                          return new WebResourceResponse(urlConnection.getContentType(),

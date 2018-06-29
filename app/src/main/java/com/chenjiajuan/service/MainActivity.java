@@ -53,28 +53,60 @@ public class MainActivity extends Activity {
      */
     private IWebViewCallback webViewCallback=new IWebViewCallback.Stub(){
 
+        /**
+         * 获取到url，decode成二维码图片
+         * @param url
+         * @throws RemoteException
+         */
         @Override
         public void showQRCode(String url) throws RemoteException {
 
         }
+
+        /**
+         * 扫码登录成功
+         * @param userInfo
+         * @throws RemoteException
+         */
 
         @Override
         public void onQRLoginSuccess(String userInfo) throws RemoteException {
 
         }
 
+        /**
+         * 扫码登录失败
+         * @param code
+         * @param msg
+         * @throws RemoteException
+         */
+
         @Override
         public void onQRLoginFailure(int code, String msg) throws RemoteException {
 
         }
+
+        /**
+         * 扫码成功
+         * @param code
+         * @param msg
+         * @throws RemoteException
+         */
 
         @Override
         public void onQRScanCodeSuccess(int code, String msg) throws RemoteException {
 
         }
 
+        /**
+         * 刷新二维码
+         * @param code
+         * @param msg
+         * @throws RemoteException
+         */
         @Override
         public void onQRRefresh(int code, String msg) throws RemoteException {
+
 
         }
     };
