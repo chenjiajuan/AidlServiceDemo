@@ -19,18 +19,28 @@
      <!--}-->
 
       //JS调Android的方案三
-        function callAndroid(){
-         // 调用prompt（）
-        var result=prompt("js://demo?username=111&password=222");
-        alert("demo " + result);
-    }
+        function callAndroidConfirm(){
+         var result=confirm("js://demo?username=111&password=222");
+          console.log(result);
+        }
+
+        function callAndroidPrompt(){
+        var result=prompt("测试测试");
+        console.log(result);
+        }
+
+        function callAndroidAlert(){
+           alert("测试测试 ！！！！" );
+        }
 
 
     </script>
 </head>
 
 <body>
-<button type="button" id="button1" onclick="callAndroid()">点击调用Android代码</button>
+<button type="button" id="button1" onclick="callAndroidConfirm()">点击调用Android代码之confirm</button>
+<button type="button" id="button2" onclick="callAndroidAlert()">点击调用Android代码之alert</button>
+<button type="button" id="button3" onclick="callAndroidPrompt()">点击调用Android代码之prompt</button>
 </body>
 
 </html>

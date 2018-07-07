@@ -95,25 +95,31 @@ public class WebViewActivity extends Activity {
             }
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                Log.e(TAG,"onJsAlert : url "+url);
+                Log.e(TAG,"onJsAlert : url : "+url+", message : "+message+" ,result : "+result.toString());
                 return super.onJsAlert(view, url, message, result);
             }
 
             @Override
             public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-                Log.e(TAG,"onJsPrompt : url "+url);
+                Log.e(TAG,"onJsPrompt : url : "+url+", message : "+message+", defaultValue : "+defaultValue);
+                result.confirm("true");
                 return super.onJsPrompt(view, url, message, defaultValue, result);
             }
 
             @Override
             public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-                Log.e(TAG,"onJsConfirm : url "+url);
+                Log.e(TAG,"onJsConfirm : url : "+url+" ,message : "+message+" , result : "+result.toString());
+                HashMap<String,String> stringHashMap=parse(message);
+                result.confirm();
                 return super.onJsConfirm(view, url, message, result);
             }
         });
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                if (progressBar.getParent()!=null){
+                    ( (ViewGroup) progressBar.getParent()).removeView(progressBar);
+                }
                 rootContent.addView(progressBar);
                 super.onPageStarted(view, url, favicon);
             }
@@ -173,21 +179,24 @@ public class WebViewActivity extends Activity {
      * webview.loadUrl(function())  通过主动调用js的函数，将结果最为参数返回
      * @param url
      */
-    public  void  parse(String url){
+
+    public void parseUrl(String url){
+        parse(url);
+    }
+
+    public  HashMap<String,String> parse(String url) {
         //拦截uri实行js调用native   js://webview?username=111&password=222";
-        Uri uri=Uri.parse(url);
-        if (uri.getScheme().equals("js")){
-            if (uri.getAuthority().equals("webview")){
-                HashMap<String,String> hashMap=new HashMap<>();
-                Set<String> stringSet=uri.getQueryParameterNames();
-                for ( String string :stringSet ){
-                    hashMap.put(string,uri.getQueryParameter(string));
-                }
-                for (String key:hashMap.keySet()){
-                    Log.e(TAG,"hash map , key : "+key+" , value : "+hashMap.get(key));
+        HashMap<String, String> hashMap = new HashMap<>();
+        Uri uri = Uri.parse(url);
+        if (uri.getScheme().equals("js")) {
+            if (uri.getAuthority().equals("webview")) {
+                Set<String> stringSet = uri.getQueryParameterNames();
+                for (String string : stringSet) {
+                    hashMap.put(string, uri.getQueryParameter(string));
                 }
             }
         }
+          return hashMap;
     }
 
     // -------------------          Android To Js       --------------------//
