@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Android 、JS </title>
+    <script>
+   // Android需要调用的方法
+    function callJS(){
+       <!--alert("Android调用了JS的callJS方法");-->
+    }
+     //JS 调Android的方案一
+    <!--function callAndroid(){-->
+      <!--var result=JsToAndroid.alertWindow("success")-->
+      <!--console.log(result)-->
+    <!--}-->
+     //JS调Android的方案二
+     <!--function callAndroid(){-->
+        <!--document.location = "js://webview?username=111&password=222";-->
+     <!--}-->
+
+      //JS调Android的方案三
+        function callAndroid(){
+         // 调用prompt（）
+        var result=prompt("js://demo?username=111&password=222");
+        alert("demo " + result);
+    }
+
+
+    </script>
+</head>
+
+<body>
+<button type="button" id="button1" onclick="callAndroid()">点击调用Android代码</button>
+</body>
+
+</html>

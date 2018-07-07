@@ -15,20 +15,20 @@ import java.lang.ref.WeakReference;
  */
 
 public class WebViewService extends Service {
-    private static final  String TAG="WebViewService";
+    private static final String TAG = "WebViewService";
     private LoginWebView loginWebView;
     private IWebViewCallback callback;
-    private WebViewHandler webViewHandler=new WebViewHandler(this);
+    private WebViewHandler webViewHandler = new WebViewHandler(this);
 
 
-    private IWebViewService webViewService=new IWebViewService.Stub() {
+    private IWebViewService webViewService = new IWebViewService.Stub() {
         @Override
         public void doLoadWebViewJsUrl(final IWebViewCallback webViewCallback) throws RemoteException {
             webViewHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e(TAG,"doLoadWebViewJsUrl......");
-                    callback=webViewCallback;
+                    Log.e(TAG, "doLoadWebViewJsUrl......");
+                    callback = webViewCallback;
                     loginWebView.showQRCode(new LoginWebView.QRCodeListener() {
                         @Override
                         public void fetchLoginUrl(String url) {
@@ -45,13 +45,14 @@ public class WebViewService extends Service {
         }
     };
 
-    private static class WebViewHandler extends Handler{
+    private static class WebViewHandler extends Handler {
         private WeakReference<WebViewService> weakReference;
 
-        public WebViewHandler(WebViewService webViewService){
-            this.weakReference=new WeakReference<WebViewService>(webViewService);
+        public WebViewHandler(WebViewService webViewService) {
+            this.weakReference = new WeakReference<WebViewService>(webViewService);
 
         }
+
         @Override
         public void handleMessage(Message msg) {
         }
@@ -61,10 +62,11 @@ public class WebViewService extends Service {
     /**
      * 各种回调状态
      */
-    private class  LoginQRTask  implements QRTaskListener{
-        public LoginQRTask(){
+    private class LoginQRTask implements QRTaskListener {
+        public LoginQRTask() {
 
         }
+
         @Override
         public void onQRLoginSuccess(String userInfo) {
             try {
@@ -77,7 +79,7 @@ public class WebViewService extends Service {
         @Override
         public void onQRLoginFailure(int code, String msg) {
             try {
-                callback.onQRLoginFailure(code,msg);
+                callback.onQRLoginFailure(code, msg);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -87,7 +89,7 @@ public class WebViewService extends Service {
         @Override
         public void onQRScanCodeSuccess(int code, String msg) {
             try {
-                callback.onQRScanCodeSuccess(code,msg);
+                callback.onQRScanCodeSuccess(code, msg);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -96,7 +98,7 @@ public class WebViewService extends Service {
         @Override
         public void onQRRefresh(int code, String msg) {
             try {
-                callback.onQRRefresh(code,msg);
+                callback.onQRRefresh(code, msg);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -107,9 +109,9 @@ public class WebViewService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        loginWebView=new LoginWebView(this);
+        loginWebView = new LoginWebView(this);
         loginWebView.setQrTaskListener(new LoginQRTask());
-        Log.e(TAG,"onCreate.....");
+        Log.e(TAG, "onCreate.....");
     }
 
     @Override
