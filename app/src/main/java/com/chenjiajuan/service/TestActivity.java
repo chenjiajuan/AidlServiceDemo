@@ -25,11 +25,11 @@ import java.util.Set;
 
 /**
  * webView的基本属性
- * webView与Js交互
+ * webView与Js交互的几种方式总结
  */
 
-public class WebViewActivity extends Activity {
-    private static final  String TAG=WebViewActivity.class.getSimpleName();
+public class TestActivity extends Activity {
+    private static final  String TAG=TestActivity.class.getSimpleName();
 //  private String url="https://www.baidu.com";
 //  private String url="https://blog.csdn.net/carson_ho/article/details/52693322";
     private String url="file:///android_asset/javascript.html";
@@ -97,14 +97,14 @@ public class WebViewActivity extends Activity {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
                 Log.e(TAG,"onJsAlert : url : "+url+", message : "+message+" ,result : "+result.toString());
-                return super.onJsAlert(view, url, message, result);
+                return true;
             }
 
             @Override
             public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
                 Log.e(TAG,"onJsPrompt : url : "+url+", message : "+message+", defaultValue : "+defaultValue);
                 result.confirm("true");
-                return super.onJsPrompt(view, url, message, defaultValue, result);
+                return true;
             }
 
             @Override
@@ -112,7 +112,7 @@ public class WebViewActivity extends Activity {
                 Log.e(TAG,"onJsConfirm : url : "+url+" ,message : "+message+" , result : "+result.toString());
                 HashMap<String,String> stringHashMap=parse(message);
                 result.confirm();
-                return super.onJsConfirm(view, url, message, result);
+                return true;
             }
         });
         webView.setWebViewClient(new WebViewClient(){
@@ -140,7 +140,7 @@ public class WebViewActivity extends Activity {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 switch (errorCode){
                     case WebViewClient.ERROR_CONNECT:
-                        Toast.makeText(WebViewActivity.this,"请检查您的网络状态！",Toast.LENGTH_LONG).show();
+                        Toast.makeText(TestActivity.this,"请检查您的网络状态！",Toast.LENGTH_LONG).show();
                         break;
                 }
                 super.onReceivedError(view, errorCode, description, failingUrl);
@@ -184,7 +184,7 @@ public class WebViewActivity extends Activity {
     public class  JsToAndroid extends Object{
         @JavascriptInterface
         public boolean alertWindow(String msg){
-            Toast.makeText(WebViewActivity.this," JsToAndroid msg : "+msg,Toast.LENGTH_LONG).show();
+            Toast.makeText(TestActivity.this," JsToAndroid msg : "+msg,Toast.LENGTH_LONG).show();
             return  true;
         }
     }

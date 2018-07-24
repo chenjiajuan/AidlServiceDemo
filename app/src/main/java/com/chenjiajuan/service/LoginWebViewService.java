@@ -14,8 +14,8 @@ import java.lang.ref.WeakReference;
  * Created by chenjiajuan on 2018/6/27.
  */
 
-public class WebViewService extends Service {
-    private static final String TAG = "WebViewService";
+public class LoginWebViewService extends Service {
+    private static final String TAG = "LoginWebViewService";
     private LoginWebView loginWebView;
     private IWebViewCallback callback;
     private WebViewHandler webViewHandler = new WebViewHandler(this);
@@ -27,7 +27,6 @@ public class WebViewService extends Service {
             webViewHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e(TAG, "doLoadWebViewJsUrl......");
                     callback = webViewCallback;
                     loginWebView.showQRCode(new LoginWebView.QRCodeListener() {
                         @Override
@@ -46,10 +45,10 @@ public class WebViewService extends Service {
     };
 
     private static class WebViewHandler extends Handler {
-        private WeakReference<WebViewService> weakReference;
+        private WeakReference<LoginWebViewService> weakReference;
 
-        public WebViewHandler(WebViewService webViewService) {
-            this.weakReference = new WeakReference<WebViewService>(webViewService);
+        public WebViewHandler(LoginWebViewService webViewService) {
+            this.weakReference = new WeakReference<LoginWebViewService>(webViewService);
 
         }
 

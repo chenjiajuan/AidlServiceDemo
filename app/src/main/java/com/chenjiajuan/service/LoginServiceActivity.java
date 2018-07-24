@@ -10,6 +10,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
+/**
+ * service进程加载webview
+ * aidl通信
+ */
+
 public class LoginServiceActivity extends Activity {
     private static final String TAG = "LoginServiceActivity";
 
