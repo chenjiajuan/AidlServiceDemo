@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsPromptResult;
@@ -156,6 +157,21 @@ public class WebViewActivity extends Activity {
 
 //        bindJsInterface();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK &&webView.canGoBack()){
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return super.onKeyUp(keyCode, event);
+    }
+
     //---------------------        Js To Android        ------------------//
 
     /**
@@ -175,7 +191,7 @@ public class WebViewActivity extends Activity {
 
     /**
      * JS调用Android的方式二
-     * 通过uri处理业务，那么如何返回值呢？
+     * 通过uri处理业务，那么如何返回值呢？====返回参数比较麻烦
      * webview.loadUrl(function())  通过主动调用js的函数，将结果最为参数返回
      * @param url
      */
@@ -201,8 +217,10 @@ public class WebViewActivity extends Activity {
 
     // -------------------          Android To Js       --------------------//
     /**
-     *  Android 调Js的两种方法
-     *  各有优缺点
+     *   1.版本要求低
+     *   2.需要刷新页面---效率低，交互不友好
+     *   3.无法直接获取返回参数
+     *   4.方便
      * @param view
      */
     public void AndroidToJs(WebView view){
@@ -212,6 +230,12 @@ public class WebViewActivity extends Activity {
             view.loadUrl("javascript:callJS()");
         }
     }
+
+    /**
+     * 1.版本要求高
+     * 2.不需要刷新页面---效率高
+     * 3.可以获取Js调用后的返参
+     */
 
     private void evaluateJavascript() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

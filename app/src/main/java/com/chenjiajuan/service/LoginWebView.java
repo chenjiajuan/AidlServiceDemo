@@ -33,7 +33,6 @@ public class LoginWebView extends LinearLayout {
     private static final String TAG = "LoginWebView";
     private WebView webView;
     private QRCodeListener qrCodeListener;
-    //    private String url="https://login.taobao.com/member/login.jhtml?redirectURL=https%3A%2F%2Fi.taobao.com%2Fmy_taobao.htm";
     private String url = "http://login.m.taobao.com/qrcodeShow.htm?appKey=24528334&from=bcqrlogin&qrwidth=90";
 
     public interface QRCodeListener {
