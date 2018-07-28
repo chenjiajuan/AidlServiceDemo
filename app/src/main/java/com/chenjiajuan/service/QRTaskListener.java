@@ -2,7 +2,7 @@ package com.chenjiajuan.service;
 
 
 /**
- * Created by chenjiajuan on 2018/6/27.
+ * Created by chenjiajuan on 2018/6/7.
  */
 
 public interface QRTaskListener {

@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginServiceActivity"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +30,9 @@
                 <action android:name="com.chenjiajuan.webview" />
             </intent-filter>
         </service>
-
-        <!--<activity-->
-            <!--android:namTestActivityvity"-->
-            <!--android:label="@string/title_activity_web_view"></activity>-->
+        <activity android:name=".MemoryTestActivity"></activity>
+        <activity android:name=".LoginServiceActivity"></activity>
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

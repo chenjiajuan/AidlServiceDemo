@@ -1,12 +1,7 @@
 package com.chenjiajuan.service;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.webkit.JsPromptResult;
-import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -18,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by chenjiajuan on 2018/6/27.
+ * Created by chenjiajuan on 2018/6/7.
  */
 
 public class LoginWebView extends LinearLayout {
@@ -48,7 +42,6 @@ public class LoginWebView extends LinearLayout {
     }
 
     private void initView(Context context) {
-        Log.e(TAG, "initView......");
         webView = new WebView(context);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new LoginInterceptWebView());
@@ -64,13 +57,11 @@ public class LoginWebView extends LinearLayout {
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-            Log.e(TAG, "api 21 shouldInterceptRequest.....");
             return super.shouldInterceptRequest(view, request);
         }
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-            Log.e(TAG, "api 14 shouldInterceptRequest.....");
             if (url.contains("qrcodelogin/generateNoLoginQRCode.do")) {
                 try {
                     URL url1 = new URL(url);
@@ -89,7 +80,6 @@ public class LoginWebView extends LinearLayout {
                         Matcher matcher = pattern.matcher(result);
                         if (matcher.find(1)) {
                             String json = matcher.group(1);
-                            Log.e(TAG, "json : " + json);
                             qrCodeListener.fetchLoginUrl(json);
                         }
                         ByteArrayInputStream inputStream = new ByteArrayInputStream(result.getBytes());

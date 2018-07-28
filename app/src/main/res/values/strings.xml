@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WebViewServiceDemo</string>
     <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
 </resources>

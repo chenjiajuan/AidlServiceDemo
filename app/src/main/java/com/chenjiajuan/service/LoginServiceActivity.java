@@ -9,19 +9,23 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.TextView;
 
 /**
  * service进程加载webview
  * aidl通信
+ *  Created by chenjiajuan on 2018/6/7.
  */
 
 public class LoginServiceActivity extends Activity {
     private static final String TAG = "LoginServiceActivity";
+    private TextView tvQrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tvQrCode=findViewById(R.id.tvQrCode);
         Intent intent = new Intent();
         intent.setPackage(this.getPackageName());
         intent.setAction("com.chenjiajuan.webview");
@@ -53,6 +57,7 @@ public class LoginServiceActivity extends Activity {
     };
     /**
      * 设置callback，处理数据
+     * 简单举例showQRCode得到servcie进程回调过来的信息
      */
     private IWebViewCallback webViewCallback = new IWebViewCallback.Stub() {
 
@@ -62,7 +67,15 @@ public class LoginServiceActivity extends Activity {
          * @throws RemoteException
          */
         @Override
-        public void showQRCode(String url) throws RemoteException {
+        public void showQRCode(final String url) throws RemoteException {
+            tvQrCode.post(new Runnable() {
+                @Override
+                public void run() {
+                    tvQrCode.setText("获取到的url : "+url);
+                }
+            });
+
+            Log.d(TAG,"url : "+url);
 
         }
 
