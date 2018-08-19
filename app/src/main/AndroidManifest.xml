@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".AutoSplitActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +30,11 @@
                 <action android:name="com.chenjiajuan.webview" />
             </intent-filter>
         </service>
-        <activity android:name=".MemoryTestActivity"></activity>
-        <activity android:name=".LoginServiceActivity"></activity>
-        <activity android:name=".TestActivity"></activity>
+
+        <activity android:name=".MemoryTestActivity" />
+        <activity android:name=".LoginServiceActivity" />
+        <activity android:name=".TestActivity" />
+        <!--<activity android:name=".AutoSplitActivity"></activity>-->
     </application>
 
 </manifest>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chenjiajuan.service.AutoSplitActivity">
+
+    <com.chenjiajuan.service.AutoSplitTextView
+        android:id="@+id/tv1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="苏图17206S072韩版时尚"
+        />
+
+    <TextView
+        android:id="@+id/tv5"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="苏图17206S072韩版时尚"
+        app:layout_constraintLeft_toRightOf="@id/tv1"
+        android:layout_marginLeft="20dp"
+        />
+
+    <com.chenjiajuan.service.AutoSplitTextView
+        android:id="@+id/tv2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="【到手价538】Apple/苹果"
+        app:layout_constraintTop_toBottomOf="@id/tv1"
+        />
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="【到手价538】Apple/苹果"
+        app:layout_constraintLeft_toRightOf="@id/tv2"
+        app:layout_constraintTop_toBottomOf="@id/tv5"
+        />
+    <com.chenjiajuan.service.AutoSplitTextView
+        android:id="@+id/tv3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="       Apple/苹果"
+        app:layout_constraintTop_toBottomOf="@id/tv2"
+        />
+
+</android.support.constraint.ConstraintLayout>
